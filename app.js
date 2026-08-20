@@ -88,8 +88,8 @@ const questions = [
     text: "Essen Sie täglich weniger als fünf Portionen Obst und Gemüse?"
   },
   {
-    name: "Essen Sie haeufig Fertiggerichte oder Fast Food",
-    text: "Essen Sie häufig Fertiggerichte oder Fast Food?"
+    name: "Essen Sie mehrfach in der Woche Fast Food",
+    text: "Essen Sie mehrfach in der Woche Fast Food ?"
   }
 ];
 
