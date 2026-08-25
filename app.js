@@ -536,24 +536,6 @@ form.addEventListener("change", event => {
   }
 });
 
-
-
-const voucherPartners = [
-  [0, 200, "Dr. Tobias Kühne"], [201, 400, "Marcel Lorenz"], [401, 600, "Christopher Reis"], [601, 800, "Giulia Kümmel"], [801, 1000, "Jana Mettler"], [1001, 1200, "Petra Schreiber"], [1201, 1400, "Andre Nelamischkies"], [1401, 1600, "Klaus Altersberger"], [1601, 1800, "Johannes Klein"], [1801, 2000, "Adriana Erz"], [2001, 2200, "Martin Hoffmann"]
-];
-
-function addAutoReplyFields(form, data) {
-  const voucher = Number(form.elements["Vouchernummer"]?.value);
-  const partner = voucherPartners.find(([from, to]) => Number.isInteger(voucher) && voucher >= from && voucher <= to);
-  const isMale = Array.from(form.elements).some((field) => /Ich bin maennlich|Ich bin männlich/i.test(field.value || ""));
-  const salutation = isMale ? "Herr" : "Frau";
-  const lastName = form.elements["Nachname"]?.value?.trim() || "";
-  const advisorText = partner ? "Ihr zuständiger FitLine-Berater " + partner[2] + " wird sich nach der Auswertung mit Ihnen in Verbindung setzen." : "Ihr zuständiger FitLine-Berater wird sich nach der Auswertung mit Ihnen in Verbindung setzen.";
-  data.set("Anrede", salutation);
-  data.set("Kundenname", lastName);
-  data.set("Beratertext", advisorText);
-}
-
 form.addEventListener("submit", async event => {
   event.preventDefault();
   clearError();
@@ -573,7 +555,6 @@ form.addEventListener("submit", async event => {
 
   try {
     const data = new FormData(form);
-    addAutoReplyFields(form, data);
 
     const response = await fetch(form.action, {
       method: "POST",
