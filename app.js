@@ -590,8 +590,8 @@ async function sendConfirmationEmail(form) {
   data.set(
     "Beratertext",
     partner
-      ? `${partner.role === "Beraterin" ? "Ihre zuständige" : "Ihr zuständiger"} FitLine-${partner.role} ${partner.name} wird sich nach der Auswertung mit Ihnen in Verbindung setzen.`
-      : "Ihr zuständiger FitLine-Berater wird sich nach der Auswertung mit Ihnen in Verbindung setzen."
+      ? `${partner.role === "Beraterin" ? "Ihre zuständige" : "Ihr zuständiger"} FitLine-${partner.role} ${partner.name} wird Ihnen die Auswertung in Ruhe in einem persönlichen Gespräch erklären und Sie beraten.`
+      : "Ihr zuständiger FitLine-Berater wird Ihnen die Auswertung in Ruhe in einem persönlichen Gespräch erklären und Sie beraten."
   );
 
   const response = await fetch("https://api.web3forms.com/submit", {
