@@ -538,17 +538,17 @@ form.addEventListener("change", event => {
 
 const confirmationAccessKey = "d3f3b6a0-df24-4fb8-b3af-ee29e08d88d2";
 const voucherPartners = [
-  [0, 200, "Dr. Tobias Kühne"],
-  [201, 400, "Marcel Lorenz"],
-  [401, 600, "Christopher Reis"],
-  [601, 800, "Giulia Kümmel"],
-  [801, 1000, "Jana Mettler"],
-  [1001, 1200, "Petra Schreiber"],
-  [1201, 1400, "Andre Nelamischkies"],
-  [1401, 1600, "Klaus Altersberger"],
-  [1601, 1800, "Johannes Klein"],
-  [1801, 2000, "Adriana Erz"],
-  [2001, 2200, "Martin Hoffmann"]
+  [0, 200, "Herr Dr. Tobias Kühne", "Berater"],
+  [201, 400, "Herr Marcel Lorenz", "Berater"],
+  [401, 600, "Herr Christopher Reis", "Berater"],
+  [601, 800, "Frau Giulia Kümmel", "Beraterin"],
+  [801, 1000, "Frau Jana Mettler", "Beraterin"],
+  [1001, 1200, "Frau Petra Schreiber", "Beraterin"],
+  [1201, 1400, "Herr Andre Nelamischkies", "Berater"],
+  [1401, 1600, "Herr Klaus Altersberger", "Berater"],
+  [1601, 1800, "Herr Johannes Klein", "Berater"],
+  [1801, 2000, "Frau Adriana Erz", "Beraterin"],
+  [2001, 2200, "Herr Martin Hoffmann", "Berater"]
 ];
 
 function getVoucherPartner(voucherValue) {
@@ -558,7 +558,9 @@ function getVoucherPartner(voucherValue) {
     return null;
   }
 
-  return voucherPartners.find(([from, to]) => voucher >= from && voucher <= to)?.[2] || null;
+  const partner = voucherPartners.find(([from, to]) => voucher >= from && voucher <= to);
+
+  return partner ? { name: partner[2], role: partner[3] } : null;
 }
 
 function getCustomerSalutation(form) {
@@ -588,7 +590,7 @@ async function sendConfirmationEmail(form) {
   data.set(
     "Beratertext",
     partner
-      ? `Ihr zuständiger FitLine-Berater ${partner} wird sich nach der Auswertung mit Ihnen in Verbindung setzen.`
+      ? `${partner.role === "Beraterin" ? "Ihre zuständige" : "Ihr zuständiger"} FitLine-${partner.role} ${partner.name} wird sich nach der Auswertung mit Ihnen in Verbindung setzen.`
       : "Ihr zuständiger FitLine-Berater wird sich nach der Auswertung mit Ihnen in Verbindung setzen."
   );
 
