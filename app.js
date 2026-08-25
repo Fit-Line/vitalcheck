@@ -536,6 +536,76 @@ form.addEventListener("change", event => {
   }
 });
 
+const confirmationAccessKey = "d3f3b6a0-df24-4fb8-b3af-ee29e08d88d2";
+const voucherPartners = [
+  [0, 200, "Dr. Tobias Kühne"],
+  [201, 400, "Marcel Lorenz"],
+  [401, 600, "Christopher Reis"],
+  [601, 800, "Giulia Kümmel"],
+  [801, 1000, "Jana Mettler"],
+  [1001, 1200, "Petra Schreiber"],
+  [1201, 1400, "Andre Nelamischkies"],
+  [1401, 1600, "Klaus Altersberger"],
+  [1601, 1800, "Johannes Klein"],
+  [1801, 2000, "Adriana Erz"],
+  [2001, 2200, "Martin Hoffmann"]
+];
+
+function getVoucherPartner(voucherValue) {
+  const voucher = Number(voucherValue);
+
+  if (!Number.isInteger(voucher)) {
+    return null;
+  }
+
+  return voucherPartners.find(([from, to]) => voucher >= from && voucher <= to)?.[2] || null;
+}
+
+function getCustomerSalutation(form) {
+  const selectedValues = Array.from(
+    form.querySelectorAll('input[type="radio"]:checked')
+  ).map(field => field.value);
+
+  if (selectedValues.some(value => /Ich bin maennlich|Ich bin männlich/i.test(value))) {
+    return "Herr";
+  }
+
+  if (selectedValues.some(value => /Ich bin weiblich/i.test(value))) {
+    return "Frau";
+  }
+
+  return "Frau/Herr";
+}
+
+async function sendConfirmationEmail(form) {
+  const partner = getVoucherPartner(form.elements["Vouchernummer"]?.value);
+  const data = new FormData();
+
+  data.set("access_key", confirmationAccessKey);
+  data.set("email", form.elements.email?.value?.trim() || "");
+  data.set("Anrede", getCustomerSalutation(form));
+  data.set("Kundenname", form.elements["Nachname"]?.value?.trim() || "");
+  data.set(
+    "Beratertext",
+    partner
+      ? `Ihr zuständiger FitLine-Berater ${partner} wird sich nach der Auswertung mit Ihnen in Verbindung setzen.`
+      : "Ihr zuständiger FitLine-Berater wird sich nach der Auswertung mit Ihnen in Verbindung setzen."
+  );
+
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    body: data,
+    headers: {
+      Accept: "application/json"
+    }
+  });
+  const result = await response.json();
+
+  if (!response.ok || !result.success) {
+    throw new Error(result.message || "Bestätigungsmail konnte nicht gesendet werden");
+  }
+}
+
 form.addEventListener("submit", async event => {
   event.preventDefault();
   clearError();
@@ -568,6 +638,12 @@ form.addEventListener("submit", async event => {
 
     if (!response.ok || !result.success) {
       throw new Error(result.message || "Fehler bei der Übermittlung");
+    }
+
+    try {
+      await sendConfirmationEmail(form);
+    } catch (confirmationError) {
+      console.error(confirmationError);
     }
 
     form.hidden = true;
