@@ -28,12 +28,19 @@ a:hover{text-decoration:underline}
   padding:64px 0 48px;
 }
 .hero-inner{text-align:center}
-.brand-logo{width:min(150px,38vw);height:auto;margin:0 auto 14px;display:block}
+.brand-logo{width:min(96px,24vw);height:auto;margin:0 auto 18px;display:block}
 .eyebrow,.step-kicker{
   margin:0 0 10px;
   color:var(--primary);
   font-weight:700;
   letter-spacing:.01em;
+}
+.eyebrow{
+  margin-bottom:14px;
+  font-size:clamp(2.5rem,7vw,5.4rem);
+  line-height:.96;
+  font-weight:800;
+  letter-spacing:-.07em;
 }
 h1{
   max-width:860px;
@@ -96,7 +103,7 @@ h1{
   background:rgba(255,255,255,.96);
   border-bottom:1px solid var(--line);
 }
-.wizard-top img{width:74px;height:auto}
+.wizard-top img{width:56px;height:auto}
 .wizard-progress{flex:1}
 .progress-meta{
   display:flex;
