@@ -538,7 +538,7 @@ form.addEventListener("change", event => {
 
 const confirmationAccessKey = "d3f3b6a0-df24-4fb8-b3af-ee29e08d88d2";
 const voucherPartners = [
-  [0, 200, "Herr Dr. Tobias Kühne", "Berater"],
+  [0, 200, "Zuständiges Vitalcheck-Team", "Berater"],
   [201, 400, "Herr Marcel Lorenz", "Berater"],
   [401, 600, "Herr Christopher Reis", "Berater"],
   [601, 800, "Frau Giulia Kümmel", "Beraterin"],
@@ -590,8 +590,8 @@ async function sendConfirmationEmail(form) {
   data.set(
     "Beratertext",
     partner
-      ? `${partner.role === "Beraterin" ? "Ihre zuständige" : "Ihr zuständiger"} FitLine-${partner.role} ${partner.name} wird Ihnen die Auswertung in Ruhe in einem persönlichen Gespräch erklären und Sie beraten.`
-      : "Ihr zuständiger FitLine-Berater wird Ihnen die Auswertung in Ruhe in einem persönlichen Gespräch erklären und Sie beraten."
+      ? `${partner.role === "Beraterin" ? "Ihre zuständige" : "Ihr zuständiger"} ${partner.name} wird Ihnen die Auswertung in Ruhe in einem persönlichen Gespräch erklären und Sie beraten.`
+      : "Ihr zuständiger Berater wird Ihnen die Auswertung in Ruhe in einem persönlichen Gespräch erklären und Sie beraten."
   );
 
   const response = await fetch("https://api.web3forms.com/submit", {
