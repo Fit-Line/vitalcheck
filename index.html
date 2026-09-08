@@ -1,1 +1,458 @@
-<!doctype html><html lang="de"><head>  <meta charset="utf-8">  <meta name="viewport" content="width=device-width, initial-scale=1">  <title>Vitalcheck</title>  <meta    name="description"    content="Ihr persönlicher Vitalcheck. Beantworten Sie wenige Fragen und erhalten Sie eine persönliche Einschätzung Ihres Wohlbefindens."  >  <meta property="og:title" content="Vitalcheck">  <meta    property="og:description"    content="Beantworten Sie wenige Fragen zu Ihrem Wohlbefinden und erhalten Sie individuelle Empfehlungen."  >  <meta    property="og:image"    content="https://vitalcheck-online.github.io/vitalcheck/vitalcheck-mark.svg"  >  <link    rel="icon"    type="image/webp"    href="vitalcheck-mark.svg"  >  <link    rel="apple-touch-icon"    href="vitalcheck-mark.svg"  >  <link rel="preconnect" href="https://fonts.googleapis.com">  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"    rel="stylesheet"  >  <link rel="stylesheet" href="style.css"></head><body>  <div class="gtranslate_wrapper"></div>  <main>    <section class="hero" id="start">      <div class="container hero-inner">        <img          class="brand-logo"          src="vitalcheck-mark.svg"          alt="Vitalcheck Logo"        >        <p class="eyebrow">Vitalcheck</p>        <h1>Ihr persönlicher Fitness-Check</h1>        <p class="lead">          Beantworten Sie in wenigen Minuten einige Fragen zu Ihrem aktuellen          Wohlbefinden. Auf Grundlage Ihrer Antworten erhalten Sie eine          persönliche Einschätzung und individuelle Empfehlungen.        </p>        <a class="cta" href="#fitness-check" id="startButton">          Jetzt Fitness-Check starten        </a>        <p class="trust">          Ihre Angaben werden selbstverständlich vertraulich behandelt.        </p>      </div>    </section>    <section class="wizard-section" id="fitness-check">      <div class="container">        <form          id="contactForm"          class="wizard-card"          method="POST"
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Vitalcheck</title>
+  <meta
+    name="description"
+    content="Ihr persönlicher Vitalcheck. Beantworten Sie wenige Fragen und erhalten Sie eine persönliche Einschätzung Ihres Wohlbefindens."
+  >
+
+  <meta property="og:title" content="Vitalcheck">
+  <meta
+    property="og:description"
+    content="Beantworten Sie wenige Fragen zu Ihrem Wohlbefinden und erhalten Sie individuelle Empfehlungen."
+  >
+  <meta
+    property="og:image"
+    content="https://vitalcheck-online.github.io/vitalcheck/vitalcheck-mark.svg"
+  >
+
+  <link
+    rel="icon"
+    type="image/webp"
+    href="vitalcheck-mark.svg"
+  >
+  <link
+    rel="apple-touch-icon"
+    href="vitalcheck-mark.svg"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="gtranslate_wrapper"></div>
+
+  <main>
+    <section class="hero" id="start">
+      <div class="container hero-inner">
+        <img
+          class="brand-logo"
+          src="vitalcheck-mark.svg"
+          alt="Vitalcheck Logo"
+        >
+
+        <p class="eyebrow">Vitalcheck</p>
+        <h1>Ihr persönlicher Fitness-Check</h1>
+
+        <p class="lead">
+          Beantworten Sie in wenigen Minuten einige Fragen zu Ihrem aktuellen
+          Wohlbefinden. Auf Grundlage Ihrer Antworten erhalten Sie eine
+          persönliche Einschätzung und individuelle Empfehlungen.
+        </p>
+
+        <a class="cta" href="#fitness-check" id="startButton">
+          Jetzt Fitness-Check starten
+        </a>
+
+        <p class="trust">
+          Ihre Angaben werden selbstverständlich vertraulich behandelt.
+        </p>
+      </div>
+    </section>
+
+    <section class="wizard-section" id="fitness-check">
+      <div class="container">
+        <form
+          id="contactForm"
+          class="wizard-card"
+          method="POST"
+          action="https://api.web3forms.com/submit"
+          novalidate
+          autocomplete="off"
+        >
+          <input
+            type="hidden"
+            name="access_key"
+            value="6d5fd8b7-70b5-4dd7-b526-308fe00e419b"
+          >
+          <input
+            type="hidden"
+            name="subject"
+            value="Neue Vitalcheck-Einsendung"
+          >
+          <input type="hidden" name="from_name" value="Vitalcheck">
+          <input type="hidden" name="format" value="html">
+          <input
+            type="checkbox"
+            name="botcheck"
+            class="hidden"
+            tabindex="-1"
+            autocomplete="off"
+          >
+
+          <div class="wizard-top">
+            <img
+              src="vitalcheck-mark.svg"
+              alt="Vitalcheck Logo"
+            >
+
+            <div class="wizard-progress">
+              <div class="progress-meta">
+                <span id="stepText">Schritt 1</span>
+                <span id="progressText">0%</span>
+              </div>
+
+              <div class="progress-bar">
+                <div id="progressFill"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="steps" class="steps">
+            <section class="step active personal-step">
+              <div class="voucher-section">
+                <p class="step-kicker">Bonusvoucher (im Wert von 19,99 EUR)</p>
+
+                <label class="full">
+                  Vouchernummer (optional)
+                  <input
+                    type="text"
+                    name="Vouchernummer"
+                    maxlength="6"
+                    pattern="[0-9]{1,6}"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    placeholder="z. B. 123456"
+                  >
+                </label>
+              </div>
+
+              <p class="step-kicker">Persönliche Angaben</p>
+              <h2>Starten wir mit Ihren Kontaktdaten.</h2>
+
+              <div class="grid">
+                <label>
+                  Vorname *
+                  <input type="text" name="Vorname" required>
+                </label>
+
+                <label>
+                  Nachname *
+                  <input type="text" name="Nachname" required>
+                </label>
+
+                <label>
+                  Straße (optional)
+                  <input type="text" name="Strasse">
+                </label>
+
+                <label>
+                  PLZ und Ort (optional)
+                  <input type="text" name="PLZ und Ort">
+                </label>
+
+                <label class="country-field">
+                  Land (optional)
+                  <select name="Land">
+                    <option value="">Bitte auswählen</option>
+                    <option value="Deutschland">Deutschland</option>
+                    <option value="Österreich">Österreich</option>
+                    <option value="Schweiz">Schweiz</option>
+                    <option value="Luxemburg">Luxemburg</option>
+                    <option value="Sonstiges">Sonstiges</option>
+                  </select>
+                </label>
+
+                <label>
+                  Alter *
+                  <input type="number" name="Alter" min="1" max="120" required>
+                </label>
+
+                <label>
+                  Telefonnummer *
+                  <input type="tel" name="Telefonnummer" required>
+                </label>
+
+                <label>
+                  E-Mail-Adresse *
+                  <input type="email" name="email" required>
+                </label>
+              </div>
+            </section>
+
+            <div id="questionSteps"></div>
+
+            <section class="step priority-step">
+              <p class="step-kicker">Mehrfachauswahl</p>
+              <h2>Was sind für Sie die drei wichtigsten Dinge im Leben?</h2>
+              <p class="hint">Bitte maximal drei Antworten auswählen.</p>
+
+              <div class="priority-section">
+                <div class="priority-row">
+                  <label class="option-card">
+                    <input type="checkbox" name="Familie" value="Ja">
+                    <span>Familie</span>
+                  </label>
+
+                  <label class="option-card">
+                    <input type="checkbox" name="Lebensqualitaet" value="Ja">
+                    <span>Lebensqualität</span>
+                  </label>
+                </div>
+
+                <div class="priority-row">
+                  <label class="option-card">
+                    <input
+                      type="checkbox"
+                      name="Finanzielle Unabhaengigkeit"
+                      value="Ja"
+                    >
+                    <span>Finanzielle Unabhängigkeit</span>
+                  </label>
+
+                  <label class="option-card">
+                    <input type="checkbox" name="Urlaub" value="Ja">
+                    <span>Urlaub</span>
+                  </label>
+                </div>
+
+                <div class="priority-row">
+                  <label class="option-card">
+                    <input type="checkbox" name="Beruf" value="Ja">
+                    <span>Beruf</span>
+                  </label>
+
+                  <label class="option-card">
+                    <input type="checkbox" name="Sonstiges" value="Ja">
+                    <span>Sonstiges</span>
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <section class="step" data-auto-advance="true">
+              <p class="step-kicker">Einzelauswahl</p>
+              <h2>
+                Wie viel ist Ihnen Ihr Wohlbefinden (und das Wohlbefinden Ihrer
+                Familie) pro Tag wert?
+              </h2>
+
+              <div class="choice-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="Wohlbefinden pro Tag"
+                    value="3 Euro"
+                    required
+                  >
+                  <span>3 €</span>
+                </label>
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="Wohlbefinden pro Tag"
+                    value="5 Euro"
+                  >
+                  <span>5 €</span>
+                </label>
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="Wohlbefinden pro Tag"
+                    value="7 Euro"
+                  >
+                  <span>7 €</span>
+                </label>
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="Wohlbefinden pro Tag"
+                    value="Mehr als 7 Euro pro Tag"
+                  >
+                  <span>Mehr als 7 € pro Tag</span>
+                </label>
+              </div>
+            </section>
+
+            <section class="step" data-auto-advance="true">
+              <p class="step-kicker">Abschlussfrage</p>
+              <h2>
+                Wenn Sie Ihre aktuelle Situation positiv verändern könnten,
+                würden Sie diese Möglichkeit nutzen?
+              </h2>
+
+              <div class="choice-grid two">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="Moeglichkeit nutzen"
+                    value="Ja"
+                    required
+                  >
+                  <span>Ja</span>
+                </label>
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="Moeglichkeit nutzen"
+                    value="Nein"
+                  >
+                  <span>Nein</span>
+                </label>
+              </div>
+            </section>
+
+            <section class="step" data-auto-advance="true">
+              <p class="step-kicker">Persönliche Auswertung</p>
+              <h2>
+                Möchten Sie eine persönliche Auswertung und Empfehlungen erhalten?
+              </h2>
+
+              <div class="choice-grid two">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="Auswertung angefordert"
+                    value="Ja"
+                    required
+                  >
+                  <span>Ja</span>
+                </label>
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="Auswertung angefordert"
+                    value="Nein"
+                  >
+                  <span>Nein</span>
+                </label>
+              </div>
+            </section>
+
+            <section class="step">
+              <p class="step-kicker">Datenschutz</p>
+              <h2>Fast fertig.</h2>
+
+              <label class="consent">
+                <input
+                  type="checkbox"
+                  name="Datenschutz Einwilligung"
+                  value="Zugestimmt"
+                  required
+                >
+                <span>
+                  Ich habe die
+                  <a
+                    href="https://gesundschlank.fit/datenschutzerklaerung/"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Datenschutzerklärung
+                  </a>
+                  gelesen und stimme der Verarbeitung meiner personenbezogenen
+                  Daten zu.
+                </span>
+              </label>
+
+              <div class="legal-links">
+                <a
+                  href="https://gesundschlank.fit/impressum/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Impressum
+                </a>
+
+                <a
+                  href="https://gesundschlank.fit/datenschutzerklaerung/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Datenschutzerklärung
+                </a>
+              </div>
+            </section>
+
+            <section class="step">
+              <p class="step-kicker">Überprüfung</p>
+              <h2>Bereit zum Absenden.</h2>
+
+              <p class="hint">
+                Bitte senden Sie den Fitness-Check jetzt ab. Ihre Angaben werden
+                anschließend übermittelt.
+              </p>
+
+              <div class="summary-box">
+                Ihre Antworten wurden erfasst. Klicken Sie auf
+                „Fitness-Check absenden“.
+              </div>
+            </section>
+          </div>
+
+          <p class="error-message" id="formError" role="alert"></p>
+
+          <div class="wizard-actions">
+            <button class="secondary-btn" type="button" id="prevBtn">
+              Zurück
+            </button>
+
+            <button class="next-btn" type="button" id="nextBtn">
+              Weiter
+            </button>
+
+            <button class="submit-btn" type="submit" id="submitBtn">
+              Fitness-Check absenden
+            </button>
+          </div>
+        </form>
+
+        <section id="successMessage" class="success-card" hidden tabindex="-1">
+          <div class="success-icon">✓</div>
+          <h2>Vielen Dank!</h2>
+          <p>
+            Vielen Dank für das Ausfüllen Ihres persönlichen Fitness-Checks.
+          </p>
+          <p>Ihre Angaben wurden erfolgreich übermittelt.</p>
+          <p>
+            Wir werden Ihre Antworten sorgfältig auswerten und uns zeitnah
+            persönlich mit Ihnen in Verbindung setzen.
+          </p>
+          <strong>Sie können dieses Fenster nun schließen.</strong>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    window.gtranslateSettings = {
+      default_language: "de",
+      detect_browser_language: true,
+      languages: ["de", "en", "fr", "es", "it"],
+      wrapper_selector: ".gtranslate_wrapper",
+      flag_style: "3d"
+    };
+  </script>
+
+  <script
+    src="https://cdn.gtranslate.net/widgets/latest/float.js"
+    defer
+  ></script>
+  <script src="app.js"></script>
+</body>
+</html>
