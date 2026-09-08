@@ -187,8 +187,51 @@ function createWeightQuestion(question, index) {
               type="radio"
               name="Gewichtsziel"
               value="Zunehmen"
+              data-conditional-required
             >
             <span>Zunehmen</span>
+          </label>
+        </div>
+
+        <div class="grid">
+          <label>
+            Größe (cm) *
+            <input
+              type="number"
+              name="Groesse"
+              min="50"
+              max="250"
+              inputmode="numeric"
+              data-conditional-required
+            >
+          </label>
+
+          <label>
+            Gewicht (kg) *
+            <input
+              type="number"
+              name="Gewicht"
+              min="20"
+              max="400"
+              step="0.1"
+              inputmode="decimal"
+              data-conditional-required
+            >
+          </label>
+
+          <label class="full">
+            Körperliche Aktivität *
+            <select
+              name="Koerperliche Aktivitaet"
+              data-conditional-required
+            >
+              <option value="">Bitte auswählen</option>
+              <option value="Wenig aktiv">Wenig aktiv</option>
+              <option value="Leicht aktiv">Leicht aktiv</option>
+              <option value="Mäßig aktiv">Mäßig aktiv</option>
+              <option value="Sehr aktiv">Sehr aktiv</option>
+              <option value="Extrem aktiv">Extrem aktiv</option>
+            </select>
           </label>
         </div>
       </div>
@@ -284,24 +327,22 @@ function getFields(step) {
 function updateConditionalRequirement(container, active) {
   if (!container) return;
 
-  const conditionalField = container.querySelector("[data-conditional-required]");
-
-  if (conditionalField) {
-    conditionalField.required = active;
-  }
+  container.querySelectorAll("[data-conditional-required]").forEach(field => {
+    field.required = active;
+  });
 }
 
 function resetConditionalFields(container) {
   if (!container) return;
 
-  container.querySelectorAll("input").forEach(input => {
-    if (input.type === "radio" || input.type === "checkbox") {
-      input.checked = false;
+  container.querySelectorAll("input, select, textarea").forEach(field => {
+    if (field.type === "radio" || field.type === "checkbox") {
+      field.checked = false;
     } else {
-      input.value = "";
+      field.value = "";
     }
 
-    input.required = false;
+    field.required = false;
   });
 }
 
@@ -435,6 +476,10 @@ function handleWeightQuestion(field, step) {
   }
 
   if (field.name === "Gewichtsziel") {
+    return true;
+  }
+
+  if (field.name === "Koerperliche Aktivitaet") {
     scheduleNextStep();
     return true;
   }
