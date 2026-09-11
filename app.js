@@ -113,19 +113,19 @@ const DEFAULT_OPTIONS = [
 const PAL_OPTIONS = [
   {
     value: "1,2–1,3",
-    label: "Kaum aktiv – überwiegend sitzend oder liegend"
+    label: "Ausschließlich sitzend oder liegend"
   },
   {
     value: "1,4–1,5",
-    label: "Wenig aktiv – fast ausschließlich sitzend, mit wenig Bewegung"
+    label: "Fast ausschließlich sitzende Tätigkeit"
   },
   {
     value: "1,6–1,7",
-    label: "Mäßig aktiv – sitzende Tätigkeit mit regelmäßigen Wegen oder Stehen"
+    label: "Sitzende Tätigkeit mit zeitweiligem Stehen oder Gehen"
   },
   {
     value: "1,8–1,9",
-    label: "Sehr aktiv – überwiegend stehend oder gehend"
+    label: "Überwiegend stehende oder gehende Tätigkeit"
   }
 ];
 
