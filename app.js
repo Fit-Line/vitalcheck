@@ -113,19 +113,19 @@ const DEFAULT_OPTIONS = [
 const PAL_OPTIONS = [
   {
     value: "1,2–1,3",
-    label: "1,2–1,3 – ausschließlich sitzende oder liegende Lebensweise"
+    label: "Kaum aktiv – überwiegend sitzend oder liegend"
   },
   {
     value: "1,4–1,5",
-    label: "1,4–1,5 – fast ausschließlich sitzende Tätigkeit"
+    label: "Wenig aktiv – fast ausschließlich sitzend, mit wenig Bewegung"
   },
   {
     value: "1,6–1,7",
-    label: "1,6–1,7 – sitzende Tätigkeit mit zeitweiligem Stehen oder Gehen"
+    label: "Mäßig aktiv – sitzende Tätigkeit mit regelmäßigen Wegen oder Stehen"
   },
   {
     value: "1,8–1,9",
-    label: "1,8–1,9 – überwiegend stehende oder gehende Tätigkeit"
+    label: "Sehr aktiv – überwiegend stehend oder gehend"
   }
 ];
 
@@ -239,7 +239,7 @@ function createWeightQuestion(question, index) {
             >
           </label>
           <label class="full">
-            Welche Aktivitätsstufe beschreibt Ihren Alltag am besten? *
+            Welche Beschreibung passt zu Ihrem typischen Alltag? *
             <select
               name="Koerperliche Aktivitaet"
               data-conditional-required
