@@ -110,6 +110,25 @@ const DEFAULT_OPTIONS = [
   { value: "Nein", label: "Nein" }
 ];
 
+const PAL_OPTIONS = [
+  {
+    value: "1,2–1,3",
+    label: "1,2–1,3 – ausschließlich sitzende oder liegende Lebensweise"
+  },
+  {
+    value: "1,4–1,5",
+    label: "1,4–1,5 – fast ausschließlich sitzende Tätigkeit"
+  },
+  {
+    value: "1,6–1,7",
+    label: "1,6–1,7 – sitzende Tätigkeit mit zeitweiligem Stehen oder Gehen"
+  },
+  {
+    value: "1,8–1,9",
+    label: "1,8–1,9 – überwiegend stehende oder gehende Tätigkeit"
+  }
+];
+
 function createOptionCard(questionName, option, required = false) {
   return `
     <label class="option-card">
@@ -201,6 +220,7 @@ function createWeightQuestion(question, index) {
               name="Groesse"
               min="50"
               max="250"
+              step="1"
               inputmode="numeric"
               data-conditional-required
             >
@@ -218,19 +238,16 @@ function createWeightQuestion(question, index) {
               data-conditional-required
             >
           </label>
-
           <label class="full">
-            Körperliche Aktivität *
+            Welche Aktivitätsstufe beschreibt Ihren Alltag am besten? *
             <select
               name="Koerperliche Aktivitaet"
               data-conditional-required
             >
               <option value="">Bitte auswählen</option>
-              <option value="Wenig aktiv">Wenig aktiv</option>
-              <option value="Leicht aktiv">Leicht aktiv</option>
-              <option value="Mäßig aktiv">Mäßig aktiv</option>
-              <option value="Sehr aktiv">Sehr aktiv</option>
-              <option value="Extrem aktiv">Extrem aktiv</option>
+              ${PAL_OPTIONS
+                .map(option => `<option value="${option.value}">${option.label}</option>`)
+                .join("")}
             </select>
           </label>
         </div>
@@ -338,6 +355,8 @@ function resetConditionalFields(container) {
   container.querySelectorAll("input, select, textarea").forEach(field => {
     if (field.type === "radio" || field.type === "checkbox") {
       field.checked = false;
+    } else if (field.tagName === "SELECT") {
+      field.selectedIndex = 0;
     } else {
       field.value = "";
     }
@@ -480,7 +499,7 @@ function handleWeightQuestion(field, step) {
   }
 
   if (field.name === "Koerperliche Aktivitaet") {
-    scheduleNextStep();
+    clearError();
     return true;
   }
 

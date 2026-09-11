@@ -316,8 +316,6 @@ input[type=radio],input[type=checkbox]{
   font-weight:600;
   color:var(--text);
 }
-
-
 .conditional-box .grid{
   margin-top:24px;
   gap:22px 16px;
